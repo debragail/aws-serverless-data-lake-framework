@@ -4,7 +4,7 @@ import os
 import urllib.parse
 from botocore.exceptions import ClientError
 import uuid
-import random
+import secrets
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -110,7 +110,7 @@ def lambda_handler(event, context):
                     "schema_name": schema,
                     "batch_id": str(uuid.uuid1()),
                     "systemtimestamp": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3],
-                    "type": random.choice(type_event)
+                    "type": secrets.choice(type_event)
                 }
             }
             
