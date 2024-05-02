@@ -259,7 +259,7 @@ class PipelineExecutionHistoryAPI:
             # Go to DDB and add new pipeline to cache
             self.logger.debug(f"check_pipeline - get from DDB: {pipeline_name}")
             result = self.pipelines_table.get_item(Key={"name": pipeline_name}, ConsistentRead=True, AttributesToGet=["name", "status"])
-            self.logger.debug("result:" + str(result))
+            self.logger.debug("result:%s", str(result))
 
             if "Item" in result:  # Pipeline found, check status
                 status = result["Item"]["status"]
