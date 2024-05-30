@@ -154,7 +154,7 @@ class MetricAPI:
                     elif metric_config_info.sns_topic != "":
                         topic = metric_config_info.sns_topic
                     else:
-                        self.logger.warn("SNS ARN is not defined neither globally nor in the metrics")
+                        self.logger.warning("SNS ARN is not defined neither globally nor in the metrics")
                         return True
 
                     topic_arn = self._get_topic_arn(topic)
