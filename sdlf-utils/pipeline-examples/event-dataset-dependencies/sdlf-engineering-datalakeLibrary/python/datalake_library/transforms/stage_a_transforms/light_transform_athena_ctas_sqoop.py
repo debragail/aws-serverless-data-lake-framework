@@ -21,7 +21,6 @@ import sys
 import logging
 import traceback
 import string
-import random
 #######################################################
 # Use S3 Interface to interact with S3 objects
 # For example to download/upload them
@@ -29,6 +28,7 @@ import random
 from datalake_library.commons import init_logger
 from datalake_library.configuration.resource_configs import S3Configuration, KMSConfiguration
 from datalake_library.interfaces.s3_interface import S3Interface
+import secrets
 
 s3_interface = S3Interface()
 # IMPORTANT: Stage bucket where transformed data must be uploaded
@@ -161,7 +161,7 @@ class CustomTransform():
             elif target_table in by_idcreditpayment:
                 bucket_field = 'idcreditpayment'
 # End Custom Code
-            rand_suffix = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(4))
+            rand_suffix = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(4))
             if not partitions:
                 # CTAS can't be used if a table has the same path
                 # It's easier to delete the table, but this process keeps the LF permissions granted on this table
