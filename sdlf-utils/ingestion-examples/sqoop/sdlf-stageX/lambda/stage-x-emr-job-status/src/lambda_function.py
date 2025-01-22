@@ -2,8 +2,8 @@ import os
 import json
 import boto3
 import logging
-import random
 from time import sleep
+import secrets
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -24,7 +24,7 @@ def lambda_handler(event, context):
         pipeline = message['pipeline']
         cluster_id = message['clusterId']
         step_id = message['StepId']
-        sleeptime = random.randint(500, 25000)/100
+        sleeptime = secrets.SystemRandom().randint(500, 25000)/100
         # sleep to avoid throttling if many steps are submitted and described at the same time
         sleep(sleeptime)
         response = emr_client.describe_step(ClusterId=cluster_id, StepId=step_id)
